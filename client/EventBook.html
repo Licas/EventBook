@@ -1,23 +1,67 @@
 <head>
-  <title>EventBook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>EventBook</title>
 </head>
 
 <body>
+
     
- {{fbheader}}
-    
- <div class="container">
-  
-  <h1>Welcome to EventBook!</h1>
-     {{> loginButtons}}
- 
-     {{#if currentUser}}
-    <ul>
-      {{#each events}}
-        {{> event}}
-      {{/each}}
-    </ul>
-    {{/if}}
+<div class="container">
+
+    <div class="row">
+        <div class="col sm12">
+            <h1>Welcome to EventBook!</h1>
+        </div>
+        <div class="col sm3">
+            {{> loginButtons}}
+        </div>
+        <div class="col sm8">
+        </div>
+    </div>
+
+    {{#if currentUser}}
+ <div class="row">
         
- </div>
+<div class="col sm12">
+        <button type="button" class="btn btn-primary" id="yourEvents">I tuoi eventi</button>
+    </div>
+     <div class="col sm12">
+        I tuoi eventi:
+        <table class="table">
+            <thead>
+                <tr><th>Nome Evento</th><th>Inizio</th><th>Fine</th></tr>
+            </thead>
+            <tbody>
+            {{#each yourEventList}}
+                {{> event}}
+            {{/each}}
+                </tbody>
+        </table>
+     </div>
+    </div>
+        <div class="row">
+            <div class="col sm6">
+                <input type="text" id="query" value="" placeholder="Search.." />
+            </div>
+            <div class="col sm6">
+                <button type="button" class="btn btn-primary" id="findEvents">Cerca eventi</button>
+            </div>
+        <div class="col sm12">
+        Eventi trovati:
+        <table class="table .table-responsive">
+            <thead>
+                <tr><th>Nome Evento</th><th>Dove</th><th>Inizio</th><th>Fine</th><th>Lista invitati</th></tr>
+            </thead>
+            <tbody>
+            {{#each eventList}}
+                {{> event}}
+            {{/each}}
+                </tbody>
+        </table>
+        </div>
+            </div>
+        {{/if}}
+
+    </div>
 </body>

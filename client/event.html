@@ -1,5 +1,14 @@
 <template name="event">
-    
-  <li>{{eventText}}</li>
-    
+
+    <tr>
+
+        <td>{{name}}</td>
+        <td>{{location}}</td>
+        <td>{{start_time}}</td>
+        <td>{{end_time}}</td>
+        <td>{{invited.count}} {{#each invited}}
+                {{name}} ({{rsvp_status}}),
+            {{/each}}</td>
+        <input type="hidden" value="{{id}}" />
+    </tr>
 </template>

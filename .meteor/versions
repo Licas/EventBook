@@ -3,13 +3,13 @@ accounts-facebook@1.0.4
 accounts-oauth@1.1.5
 accounts-ui@1.1.5
 accounts-ui-unstyled@1.1.7
-autopublish@1.0.3
 autoupdate@1.2.1
 base64@1.0.3
 binary-heap@1.0.3
 blaze@2.1.2
 blaze-tools@1.0.3
 boilerplate-generator@1.0.3
+bootstrap@1.0.1
 callback-hook@1.0.3
 check@1.0.5
 ddp@1.1.0
