@@ -1,0 +1,23 @@
+<head>
+  <title>EventBook</title>
+</head>
+
+<body>
+    
+ {{fbheader}}
+    
+ <div class="container">
+  
+  <h1>Welcome to EventBook!</h1>
+     {{> loginButtons}}
+ 
+     {{#if currentUser}}
+    <ul>
+      {{#each events}}
+        {{> event}}
+      {{/each}}
+    </ul>
+    {{/if}}
+        
+ </div>
+</body>
