@@ -1,5 +1,3 @@
-
-
 Meteor.startup(function(){
     
      window.fbAsyncInit = function() {
@@ -25,7 +23,13 @@ Meteor.startup(function(){
 
     Meteor.subscribe("users");
 
-    Session.set("friendList", []);
+    var fList = localStorage.getItem("friendList");
+    if(fList) {
+        Session.set("friendList", fList);
+    } else {
+        localStorage.setItem("friendList", new Array());
+        Session.set("friendList", new Array());
+    }
 
     console.log("Starting up..");
 

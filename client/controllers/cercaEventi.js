@@ -78,7 +78,7 @@ Template.cercaeventi.events({
         var query = $('#query').val();
         $('#query').val('');
 
-        FB.api('/search?q='+query+'&type=event&center='+lat+','+lng,
+        FB.api('/search?q='+query+'&type=event&center='+lat+','+lng+'&limit=200',
               {access_token:Meteor.user().services.facebook.accessToken},
               function(res){
                 var events= [];
