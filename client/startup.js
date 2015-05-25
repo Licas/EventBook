@@ -5,7 +5,7 @@ Meteor.startup(function(){
      window.fbAsyncInit = function() {
         FB.init({
           channelUrl:'http://localhost:3000',
-          appId:    Meteor.settings.public.appId,
+          appId:    Meteor.settings.public.APP_ID,
           status:   true,
           cookie:   true,
           xfbml:    true,
