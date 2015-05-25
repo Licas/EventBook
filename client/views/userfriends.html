@@ -1,0 +1,21 @@
+<template name="userfriends">
+    <body>
+        {{> navbar}}
+        <div class="container">
+            <div class="row">
+                <h4>Aggiungi amico</h4>
+                <div class="col-sm-12">
+                    <input type="text" id="addfriendin" value="" placeholder="friend name.." />
+                    <button type="button" class="btn btn-primary" id="addfriend">Aggiungi amico alla lista</button>
+                </div>
+                <div class="col-sm-12">
+                    <ul class="list-group">
+                        {{#each friendList}}
+                        <li class="list-group-item">{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</template>

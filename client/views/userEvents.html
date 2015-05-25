@@ -1,0 +1,29 @@
+<template name="userevents">
+    <body>
+        {{> navbar}}
+        <div class="container">
+        <div class="row">
+            <h4>Riepilogo dei tuoi eventi</h4>
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-primary" id="yourEvents">I tuoi eventi</button>
+            </div>
+            <div class="col-sm-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome Evento</th>
+                            <th>Dove</th>
+                            <th>Inizio</th>
+                            <th>Fine</th>
+                            <th>Invitati</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each yourEventList}} {{> event}} {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            </div>
+    </body>
+</template>
