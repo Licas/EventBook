@@ -69,6 +69,7 @@ Template.cercaeventi.events({
         Session.set("localEvents",events);
     },
     "click #findEvents":function() {
+        Session.set("pageIndex",0);
 
         var friendList = Session.get("friendList");
 
