@@ -10,23 +10,23 @@
 <div class="container">
 
     <div class="row">
-        <div class="col sm12">
+        <div class="col-sm-12">
             <h1>Welcome to EventBook!</h1>
         </div>
-        <div class="col sm3">
+        <div class="col-sm-3">
             {{> loginButtons}}
         </div>
-        <div class="col sm8">
+        <div class="col-sm-8">
         </div>
     </div>
 
     {{#if currentUser}}
  <div class="row">
         
-<div class="col sm12">
+<div class="col-sm-12">
         <button type="button" class="btn btn-primary" id="yourEvents">I tuoi eventi</button>
     </div>
-     <div class="col sm12">
+     <div class="col-sm-12">
         I tuoi eventi:
         <table class="table">
             <thead>
@@ -36,29 +36,36 @@
             {{#each yourEventList}}
                 {{> event}}
             {{/each}}
-                </tbody>
+            </tbody>
         </table>
      </div>
     </div>
         <div class="row">
-            <div class="col sm6">
+            <div class="col-sm-6">
                 <input type="text" id="query" value="" placeholder="Search.." />
             </div>
-            <div class="col sm6">
+            <div class="col-sm-6">
                 <button type="button" class="btn btn-primary" id="findEvents">Cerca eventi</button>
+                <button type="button" class="btn btn-primary" id="checkFriends">Cerca amici</button>
             </div>
-        <div class="col sm12">
-        Eventi trovati:
+        <div class="col-sm-12">
+        Eventi trovati {{pageCount}}:
         <table class="table .table-responsive">
             <thead>
                 <tr><th>Nome Evento</th><th>Dove</th><th>Inizio</th><th>Fine</th><th>Lista invitati</th></tr>
             </thead>
             <tbody>
-            {{#each eventList}}
+            {{#each eventListPage}}
                 {{> event}}
             {{/each}}
                 </tbody>
         </table>
+        <nav>
+          <ul class="pager">
+            <li><a href="#" id="prevEvent">Previous</a></li>
+            <li><a href="#" id="nextEvent">Next</a></li>
+          </ul>
+        </nav>
         </div>
             </div>
         {{/if}}

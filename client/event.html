@@ -7,7 +7,7 @@
         <td>{{start_time}}</td>
         <td>{{end_time}}</td>
         <td>{{invited.count}} {{#each invited}}
-                {{name}} ({{rsvp_status}}),
+                {{name}} ({{rsvp_status}}, your friend={{isfriend}}),
             {{/each}}</td>
         <input type="hidden" value="{{id}}" />
     </tr>
