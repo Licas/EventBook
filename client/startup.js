@@ -25,6 +25,8 @@ Meteor.startup(function(){
 
     Meteor.subscribe("users");
 
+    Session.set("friendList", []);
+
     console.log("Starting up..");
 
     geoLocalization.getLatLng();

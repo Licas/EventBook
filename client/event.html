@@ -4,10 +4,10 @@
 
         <td>{{name}}</td>
         <td>{{location}}</td>
-        <td>{{start_time}}</td>
-        <td>{{end_time}}</td>
+        <td>{{formatDate start_time}}</td>
+        <td>{{formatDate end_time}}</td>
         <td>{{invited.count}} {{#each invited}}
-                {{name}} ({{rsvp_status}}, your friend={{isfriend}}),
+            {{#if isfriend}}<b> {{name}}</b>{{else}} {{name}} {{/if}} ({{rsvp_status}}),
             {{/each}}</td>
         <input type="hidden" value="{{id}}" />
     </tr>

@@ -1,7 +1,7 @@
 
 var paginationStep = 5; //5 elements for single page
 
-Template.body.rendered = function(){
+Template.cercaeventi.rendered = function(){
     Session.set("pageIndex",0);
 
     geoLocalization.getLatLng();
@@ -10,7 +10,11 @@ Template.body.rendered = function(){
 Template.cercaeventi.helpers({
 
     pageCount: function() {
-        return Session.get("localEvents").length;
+        if(Session.get("localEvents")) {
+            return Session.get("localEvents").length;
+        }
+
+        return 0;
     },
     pageIndex: function() {
         return Session.get("pageIndex");
@@ -20,13 +24,17 @@ Template.cercaeventi.helpers({
     },
     eventListPage: function() {
         var idx = 0;
-        if(Session.get("pageIndex")) {
-            idx = Session.get("pageIndex");
-        } else {
-            Session.set("pageIndex", idx);
-        }
+        if(Session.get("localEvents")) {
+            if(Session.get("pageIndex")) {
+                idx = Session.get("pageIndex");
+            } else {
+                Session.set("pageIndex", idx);
+            }
 
-        return Session.get("localEvents").slice(idx, idx+paginationStep);
+            return Session.get("localEvents").slice(idx, idx+paginationStep);
+        } else {
+            return [];
+        }
     }
 });
 
@@ -69,7 +77,7 @@ Template.cercaeventi.events({
         var query = $('#query').val();
         $('#query').val('');
 
-        FB.api('/search?q='+query+'&type=event&center='+lat+','+lng+'&distance=5000',
+        FB.api('/search?q='+query+'&type=event&center='+lat+','+lng,
               {access_token:Meteor.user().services.facebook.accessToken},
               function(res){
                 var events= [];

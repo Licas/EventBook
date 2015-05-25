@@ -1,3 +1,5 @@
-//Template.registerHelper('appID', function(){
-//2	    return Meteor.settings.public.appId ? Meteor.settings.public.appId : '';
-//4});
+
+Template.registerHelper('formatDate', function(date) {
+    //console.log(moment(date));
+  return moment(date).format('DD/MM/YYYY HH:mm');
+});
