@@ -22,12 +22,11 @@
 
     {{#if currentUser}}
  <div class="row">
-        
+        <h4>Riepilogo dei tuoi eventi</h4>
 <div class="col-sm-12">
         <button type="button" class="btn btn-primary" id="yourEvents">I tuoi eventi</button>
     </div>
      <div class="col-sm-12">
-        I tuoi eventi:
         <table class="table">
             <thead>
                 <tr><th>Nome Evento</th><th>Inizio</th><th>Fine</th></tr>
@@ -40,34 +39,25 @@
         </table>
      </div>
     </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <input type="text" id="query" value="" placeholder="Search.." />
-            </div>
-            <div class="col-sm-6">
-                <button type="button" class="btn btn-primary" id="findEvents">Cerca eventi</button>
-                <button type="button" class="btn btn-primary" id="checkFriends">Cerca amici</button>
-            </div>
-        <div class="col-sm-12">
-        Eventi trovati {{pageCount}}:
-        <table class="table .table-responsive">
-            <thead>
-                <tr><th>Nome Evento</th><th>Dove</th><th>Inizio</th><th>Fine</th><th>Lista invitati</th></tr>
-            </thead>
-            <tbody>
-            {{#each eventListPage}}
-                {{> event}}
-            {{/each}}
-                </tbody>
-        </table>
-        <nav>
-          <ul class="pager">
-            <li><a href="#" id="prevEvent">Previous</a></li>
-            <li><a href="#" id="nextEvent">Next</a></li>
-          </ul>
-        </nav>
-        </div>
-            </div>
+
+     <div class="row">
+         <h4>Aggiungi amico</h4>
+         <div class="col-sm-12">
+                <input type="text" id="addfriendin" value="" placeholder="friend name.." />
+             <button type="button" class="btn btn-primary" id="addfriend">Aggiungi amico alla lista</button>
+         </div>
+          <div class="col-sm-12">
+                <ul class="list-group">
+                  {{#each friendList}}
+                  <li class="list-group-item">{{this}}</li>
+                  {{/each}}
+                </ul>
+         </div>
+    </div>
+
+            {{> cercaeventi}}
+
+
         {{/if}}
 
     </div>

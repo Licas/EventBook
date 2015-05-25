@@ -1,0 +1,38 @@
+<template name="cercaeventi">
+
+    <div class="row">
+        <h4>Cerca eventi</h4>
+        <div class="col-sm-6">
+            <input type="text" id="query" value="" placeholder="Search.." />
+        </div>
+        <div class="col-sm-6">
+            <button type="button" class="btn btn-primary" id="findEvents">Cerca</button>
+            <button type="button" class="btn btn-primary" id="checkFriends">Cerca amici</button>
+        </div>
+        <div class="col-sm-12">
+            Eventi trovati {{pageCount}}:
+            <table class="table .table-responsive">
+                <thead>
+                    <tr>
+                        <th>Nome Evento</th>
+                        <th>Dove</th>
+                        <th>Inizio</th>
+                        <th>Fine</th>
+                        <th>Lista invitati</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each eventListPage}} {{> event}} {{/each}}
+                </tbody>
+            </table>
+            <nav>
+                <ul class="pager">
+                    <li><a href="#" id="prevEvent">Previous</a>
+                    </li>
+                    <li><a href="#" id="nextEvent">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</template>
