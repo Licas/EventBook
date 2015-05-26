@@ -1,5 +1,5 @@
 
-var paginationStep = 5; //5 elements for single page
+var paginationStep = 10; //5 elements for single page
 
 Template.cercaeventi.rendered = function(){
     Session.set("pageIndex",0);
@@ -95,7 +95,7 @@ function findEvents() {
     var query = $('#query').val();
     $('#query').val('');
 
-    FB.api('/search?q='+query+'&type=event&center='+lat+','+lng+'&limit=200',
+    FB.api('/search?q=\"'+query+'\"&type=event&center='+lat+','+lng+'&limit=200',
           {access_token:Meteor.user().services.facebook.accessToken},
           function(res){
             var events= [];
@@ -103,34 +103,14 @@ function findEvents() {
             if (res && !res.error) {
                 res.data.forEach(function(element) {
                     //console.log("current event: "+JSON.stringify(element));
-
-                    FB.api('/'+element.id+'/invited',
-                           'get',
-                           {access_token:Meteor.user().services.facebook.accessToken},
-                           function(response){
-                        if (response && !response.error) {
-                            element.invited = response.data;
-
-                            for(index in  element.invited) {
-                                if(friendList.indexOf(element.invited[index].name) >= 0) {
-                                    element.invited[index].isfriend = true;
-                                    console.log("you have a friend " + JSON.stringify(element.invited[index].name));
-                                } else {
-                                    element.invited[index].isfriend = false;
-                                }
-                            }
-
-                            events.push(element);
-                            //console.log("invitation list: " + JSON.stringify(element.invited));
-
-                        } else {
-                            console.log("error in retrieving invitation list for event " + element.id + ". Error " + JSON.stringify(response.error));
-                        }
-
-                        eventUtil.sortEventsByInvited(events);
+                    fbGraphUtil.loadEventInvitedList(element.id, function(list){
+//                        console.log("list " + JSON.stringify(list));
+                        element.invited = list;
+                        console.log("Pushing #" + element.invited.length);
+                        events.push(element);
+                        events = eventUtil.sortEventsByInvited(events);
                         Session.set("localEvents",events);
                     });
-
                 });
 
             } else {

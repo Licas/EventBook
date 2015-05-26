@@ -2,10 +2,10 @@
 
     <tr class="eventrow">
         <td>{{name}}</td>
-        <td>{{location}}</td>
+        <td>{{location}} - {{invited.length}} invitati</td>
         <td>{{formatDate start_time}}</td>
         <td>{{formatDate end_time}}</td>
-        <td>{{invited.count}} {{#each invited}}
+        <td>{{#each invited}}
             {{#if isfriend}}<b> {{name}}</b>{{else}} {{name}} {{/if}} ({{rsvp_status}}),
             {{/each}}</td>
         <input type="hidden" value="{{id}}" />
