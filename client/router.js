@@ -21,3 +21,9 @@ Router.map(function(){
         path:'/'
     });
 });
+
+Router.map(function(){
+    this.route('eventdetails', {
+        path:'/eventdetails'
+    });
+});

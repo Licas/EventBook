@@ -5,6 +5,8 @@ Template.cercaeventi.rendered = function(){
     Session.set("pageIndex",0);
 
     geoLocalization.getLatLng();
+
+    $('#query').focus();
 };
 
 Template.cercaeventi.helpers({
@@ -38,8 +40,13 @@ Template.cercaeventi.helpers({
     }
 });
 
-
 Template.cercaeventi.events({
+    "keyup #query": function(event) {
+        if (event.which == 13) {
+            event.stopPropagation();
+            findEvents();
+        }
+    },
     "click #prevEvent": function() {
         if( Session.get("pageIndex") > 0) {
             Session.set("pageIndex", Session.get("pageIndex") - paginationStep);
@@ -69,7 +76,17 @@ Template.cercaeventi.events({
         Session.set("localEvents",events);
     },
     "click #findEvents":function() {
-        Session.set("pageIndex",0);
+        event.stopPropagation();
+        findEvents();
+    }
+
+});
+
+
+
+
+function findEvents() {
+Session.set("pageIndex",0);
 
         var friendList = Session.get("friendList");
 
@@ -117,6 +134,4 @@ Template.cercaeventi.events({
                     console.log("error occurred: " + JSON.stringify(res.error));
                 }
         });
-    }
-
-});
+}
