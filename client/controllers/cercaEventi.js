@@ -96,33 +96,35 @@ function findEvents() {
     var query = $('#query').val();
     $('#query').val('');
 
-    FB.api('/search?q=\"'+query+'\"&type=event&center='+lat+','+lng+'&limit=200',
-          {access_token:Meteor.user().services.facebook.accessToken},
-          function(res){
-            var events= [];
+    if(query && query!="") {
+        FB.api('/search?q=\"'+query+'\"&type=event&center='+lat+','+lng+'&limit=200',
+              {access_token:Meteor.user().services.facebook.accessToken},
+              function(res){
+                var events= [];
 
-            if (res && !res.error) {
+                if (res && !res.error) {
 
-                res.data.forEach(function(element) {
-                    var timeToCompare;
-                    if(element.end_time) {
-                        timeToCompare = element.end_time;
-                    } else {
-                        timeToCompare = element.start_time;
-                    }
+                    res.data.forEach(function(element) {
+                        var timeToCompare;
+                        if(element.end_time) {
+                            timeToCompare = element.end_time;
+                        } else {
+                            timeToCompare = element.start_time;
+                        }
 
-                    if( eventUtil.checkEventEndTime(timeToCompare) ) {
-                       fbGraphUtil.loadEventInvitedList(element.id, function(list){
-                            element.invited = list;
-                            events.push(element);
-                            //events = eventUtil.sortEventsByInvited(events);
-                            Session.set("localEvents",events);
-                        });
-                    }
-                });
+                        if( eventUtil.checkEventEndTime(timeToCompare) ) {
+                           fbGraphUtil.loadEventInvitedList(element.id, function(list){
+                                element.invited = list;
+                                events.push(element);
+                                //events = eventUtil.sortEventsByInvited(events);
+                                Session.set("localEvents",events);
+                            });
+                        }
+                    });
 
-            } else {
-                console.log("error occurred: " + JSON.stringify(res.error));
-            }
-    });
+                } else {
+                    console.log("error occurred: " + JSON.stringify(res.error));
+                }
+        });
+    }
 }
