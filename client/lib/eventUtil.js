@@ -23,11 +23,27 @@ function sortEventsByInvited(eventList) {
     return eventList;
 }
 
+function checkEventEndTime(event_end_time) {
+    var today = moment();
+    var moment_end_time = moment(event_end_time);
+
+    if(today.isAfter(moment_end_time)) {
+  //      console.log( event_end_time + " is a past event");
+        return false;
+    }
+
+    //console.log("Comparing " + today + " with " + event_end_time);
+
+    return true;
+}
 
 eventUtil = {
 
 
     sortEventsByInvited: function(eventList) {
         return sortEventsByInvited(eventList);
+    },
+    checkEventEndTime: function(endTime) {
+        return checkEventEndTime(endTime);
     }
 }
