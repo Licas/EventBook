@@ -1,6 +1,6 @@
 Template.event.events({
 
-    "click .eventrow": function() {
+    "click #dettaglio": function() {
         console.log("looking for event " + this.id + " details.");
         FB.api('/'+this.id + '/',
                'get',
@@ -11,9 +11,10 @@ Template.event.events({
                var eventDetails = {};
 
                 eventDetails = res;
-
+                eventDetails.invited = this.invited;
                 Session.set("eventDetails", eventDetails);
-                //console.log("RESPONSE\n"+JSON.stringify(eventDetails));
+                console.log("this " + this);
+                console.log("RESPONSE\n"+JSON.stringify(eventDetails));
 
                 Router.go("/eventdetails");
             }  else {

@@ -44,6 +44,8 @@ Template.cercaeventi.events({
     "keyup #query": function(event) {
         if (event.which == 13) {
             event.stopPropagation();
+            Session.set("localEvents",[]);
+            Meteor.flush();
             findEvents();
         }
     },
@@ -75,13 +77,12 @@ Template.cercaeventi.events({
         }
         Session.set("localEvents",events);
     },
-    "click #findEvents":function() {
+    "click #findEvents":function(event) {
         event.stopPropagation();
         findEvents();
     }
 
 });
-
 
 
 
@@ -101,16 +102,23 @@ function findEvents() {
             var events= [];
 
             if (res && !res.error) {
+
                 res.data.forEach(function(element) {
-                    //console.log("current event: "+JSON.stringify(element));
-                    fbGraphUtil.loadEventInvitedList(element.id, function(list){
-//                        console.log("list " + JSON.stringify(list));
-                        element.invited = list;
-                        console.log("Pushing #" + element.invited.length);
-                        events.push(element);
-                        events = eventUtil.sortEventsByInvited(events);
-                        Session.set("localEvents",events);
-                    });
+                    var timeToCompare;
+                    if(element.end_time) {
+                        timeToCompare = element.end_time;
+                    } else {
+                        timeToCompare = element.start_time;
+                    }
+
+                    if( eventUtil.checkEventEndTime(timeToCompare) ) {
+                       fbGraphUtil.loadEventInvitedList(element.id, function(list){
+                            element.invited = list;
+                            events.push(element);
+                            //events = eventUtil.sortEventsByInvited(events);
+                            Session.set("localEvents",events);
+                        });
+                    }
                 });
 
             } else {
